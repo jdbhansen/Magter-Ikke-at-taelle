@@ -1,0 +1,3 @@
+# Magter-Ikke-at-taelle
+Playing around with WPF and C#
+Converts orderline text to items...
