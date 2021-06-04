@@ -6,7 +6,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
 {
     public class ItemMapper : IItemMapper
     {
-        private Dictionary<int, IItem> itemMap;
+        private readonly Dictionary<int, IItem> itemMap;
 
         public ItemMapper()
         {
@@ -20,7 +20,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                 if (itemMap.ContainsKey(item.Id))
                 {
                     IItem mappedItem = itemMap[item.Id];
-                    mappedItem.AddToQuantity(item.Quantity);
+                    _ = mappedItem.AddToQuantity(item.Quantity);
                     itemMap[mappedItem.Id] = mappedItem;
                     return true;
                 }

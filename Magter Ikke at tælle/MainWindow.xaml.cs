@@ -45,10 +45,10 @@ namespace Magter_Ikke_at_tælle
             {
                 StringBuilder sb = new StringBuilder();
                 string str = "id\tqty\n";
-                sb.Append(str);
+                _ = sb.Append(str);
                 foreach (IItem item in items)
                 {
-                    sb.Append(item);
+                    _ = sb.Append(item.ToString());
                 }
                 OutputText.Text = sb.ToString();
                 TotalCount.Text = cvi.CountOfOrderLines().ToString();

@@ -20,16 +20,14 @@ namespace Magter_Ikke_at_tælle.converter.implementations
 
         public List<IItem> ConvertText(string str)
         {
-            string[] splStrings = str.Split();
-
             bool foundId = false;
             bool foundQty = false;
             int itemId = 0;
             int itemQty = 0;
-
-            for (int i = 0; i < splStrings.Length; i++)
+            string[] splStrings = str.Split();
+            for (int k = 0; k < splStrings.Length; k++)
             {
-                string singleStr = splStrings[i];
+                string singleStr = splStrings[k];
                 if (singleStr.Length == 5 && foundId == false)
                 {
                     if (InputIsAnInt(singleStr))
@@ -58,7 +56,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                 if (foundId && foundQty)
                 {
                     IItem item = new Item(itemId, itemQty);
-                    itemMapper.AddItem(item);
+                    _ = itemMapper.AddItem(item);
                     itemId = 0;
                     itemQty = 0;
                     foundId = false;
@@ -100,15 +98,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
 
         private bool DoesStringContainDotOrComma(string str)
         {
-            if (DoesStringContainDot(str))
-            {
-                return true;
-            }
-            if (DoesStringContainComma(str))
-            {
-                return true;
-            }
-            return false;
+            return DoesStringContainDot(str) || DoesStringContainComma(str);
         }
 
         private bool InputIsAnInt(string str)
@@ -117,13 +107,15 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             {
                 return false;
             }
+
             try
             {
-                int.Parse(str);
+                _ = int.Parse(str);
                 return true;
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
+                _ = e;
                 return false;
             }
         }
