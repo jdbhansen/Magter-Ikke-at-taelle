@@ -1,0 +1,91 @@
+﻿<Window
+    x:Class="Magter_Ikke_at_tælle.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Magter_Ikke_at_tælle"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Magter ikke at tælle..."
+    Width="800"
+    Height="500"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="bob"
+        Width="500px"
+        Height="500px">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="300" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <StackPanel
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Margin="50,0,50,0">
+            <TextBlock
+                HorizontalAlignment="Stretch"
+                FontFamily="Times New Roman"
+                FontSize="18"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                <LineBreak />
+                THE GLORIOUS 'MAGTER IKKE AT TÆLLE'-APP<LineBreak />
+            </TextBlock>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3">
+            <Label HorizontalAlignment="Center">
+                Orderlines converted:
+            </Label>
+            <TextBlock
+                x:Name="TotalCount"
+                HorizontalAlignment="Center"
+                Text="0" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="2px"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+            <Button
+                x:Name="mainButton"
+                Click="MainButton_Click"
+                Cursor="Hand">
+                Convert
+            </Button>
+            <Button
+                x:Name="ClearButton"
+                Click="ClearButton_Click"
+                Cursor="Hand">
+                Clear
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Label HorizontalAlignment="Center" Content="Paste the orderlines here:" />
+            <TextBox
+                x:Name="InputText"
+                Height="250"
+                AcceptsReturn="true"
+                AcceptsTab="true" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <Label HorizontalAlignment="Center" Content="Result:" />
+            <TextBox
+                x:Name="OutputText"
+                Height="250"
+                AcceptsReturn="true"
+                AcceptsTab="true"
+                IsReadOnly="True" />
+        </StackPanel>
+
+    </Grid>
+</Window>
