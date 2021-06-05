@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Magter_Ikke_at_tælle.converter.implementations
 {
-    public class TextToItemConverter : IConvertTextToItems
+    public class TextToItemsConverter : IConvertTextToItems
     {
         private readonly int[] idRange;
         private readonly int maxQty;
         private readonly IItemMapper itemMapper;
         private int orderLineCounter = 0;
 
-        public TextToItemConverter(int[] idRange, int maxQty)
+        public TextToItemsConverter(int[] idRange, int maxQty)
         {
             this.idRange = idRange;
             this.maxQty = maxQty;
@@ -25,9 +25,10 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             int itemId = 0;
             int itemQty = 0;
             string[] splStrings = str.Split();
-            for (int k = 0; k < splStrings.Length; k++)
+            _ = str;
+            for (int i = 0; i < splStrings.Length; i++)
             {
-                string singleStr = splStrings[k];
+                string singleStr = splStrings[i];
                 if (singleStr.Length == 5 && foundId == false)
                 {
                     if (InputIsAnInt(singleStr))
@@ -56,6 +57,20 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                 if (foundId && foundQty)
                 {
                     IItem item = new Item(itemId, itemQty);
+                    //string name;
+                    //try
+                    //{
+                    //    name = splStrings[i + 1];
+                    //}
+                    //catch (IndexOutOfRangeException e)
+                    //{
+                    //    _ = e;
+                    //    name = "";
+                    //}
+                    //if (name != null && name.Length >= 2)
+                    //{
+                    //    item.Name = name;
+                    //}
                     _ = itemMapper.AddItem(item);
                     itemId = 0;
                     itemQty = 0;
@@ -64,6 +79,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                     orderLineCounter++;
                 }
             }
+
             List<IItem> items = itemMapper.GetItems();
             itemMapper.Clear();
             return items;

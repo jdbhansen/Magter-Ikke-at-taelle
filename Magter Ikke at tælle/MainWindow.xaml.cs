@@ -22,6 +22,7 @@ namespace Magter_Ikke_at_tælle
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly StringBuilder SB = new StringBuilder();
         private string input;
         private readonly IConvertTextToItems cvi;
         private static readonly int[] idRange = { 60000, 90000 };
@@ -29,37 +30,47 @@ namespace Magter_Ikke_at_tælle
         private List<IItem> items;
         public MainWindow()
         {
-            cvi = new TextToItemConverter(idRange, MaxQty);
+            cvi = new TextToItemsConverter(idRange, MaxQty);
             InitializeComponent();
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
             cvi.ResetCount();
-            input = InputText.Text.ToString();
+            input = InputText.Text;
             if (input.Length > 10)
             {
                 items = cvi.ConvertText(input);
             }
-            if (items != null && items.Count != 0)
+            OutputText.Text = ConvertItemsToString();
+            TotalCount.Text = cvi.CountOfOrderLines().ToString();
+            if (KeepInput.IsChecked == false)
             {
-                StringBuilder sb = new StringBuilder();
-                string str = "id\tqty\n";
-                _ = sb.Append(str);
-                foreach (IItem item in items)
-                {
-                    _ = sb.Append(item.ToString());
-                }
-                OutputText.Text = sb.ToString();
-                TotalCount.Text = cvi.CountOfOrderLines().ToString();
-                input = "";
+                InputText.Text = "";
             }
-
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             ClearEverything();
+        }
+
+        private string ConvertItemsToString()
+        {
+            if (SB.Length != 0)
+            {
+                _ = SB.Clear();
+            }
+            if (items != null && items.Count != 0)
+            {
+                string str = "id\tqty\n";
+                _ = SB.Append(str);
+                foreach (IItem item in items)
+                {
+                    _ = SB.Append(item.ToString());
+                }
+            }
+            return SB.ToString();
         }
 
         private void ClearEverything()

@@ -36,6 +36,7 @@
                 <LineBreak />
                 THE GLORIOUS 'MAGTER IKKE AT TÆLLE'-APP<LineBreak />
             </TextBlock>
+            <CheckBox x:Name="KeepInput">Keep input</CheckBox>
         </StackPanel>
         <StackPanel
             Grid.Row="1"
@@ -48,6 +49,7 @@
                 x:Name="TotalCount"
                 HorizontalAlignment="Center"
                 Text="0" />
+
         </StackPanel>
         <StackPanel
             Grid.Row="2"

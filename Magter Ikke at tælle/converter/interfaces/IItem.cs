@@ -3,7 +3,7 @@
     public interface IItem
     {
         int Id { get; }
-        string Name { get; }
+        string Name { get; set; }
         int Quantity { get; set; }
         int AddToQuantity(int quantityToAdd);
     }

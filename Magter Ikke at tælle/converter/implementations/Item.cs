@@ -6,7 +6,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
     {
         public int Id { get; }
         public int Quantity { get; set; }
-        public string Name { get; }
+        public string Name { get; set; }
         public Item(int id, int qty)
         {
             Id = id;
@@ -18,8 +18,6 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             Quantity = qty;
             Name = name;
         }
-
-
         public int AddToQuantity(int quantityToAdd)
         {
             Quantity += quantityToAdd;
