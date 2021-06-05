@@ -17,21 +17,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
         }
         public string[] GetLines(string str)
         {
-            List<string> stringLines = new List<string>();
-            string[] singleStrings = str.Split();
-            int stringStart = 0;
-            for (int i = 0; i < singleStrings.Length; i++)
-            {
-                if (singleStrings[i].Contains(newLine))
-                {
-                    for (int k = stringStart; k < i; k++)
-                    {
-                        stringLines.Add(singleStrings[k]);
-                        stringStart = i;
-                    }
-                }
-            }
-            return stringLines.ToArray();
+            return str.Split(newLine.ToCharArray());
         }
     }
 }

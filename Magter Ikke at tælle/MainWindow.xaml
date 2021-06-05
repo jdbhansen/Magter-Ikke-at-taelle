@@ -37,6 +37,7 @@
                 THE GLORIOUS 'MAGTER IKKE AT TÆLLE'-APP<LineBreak />
             </TextBlock>
             <CheckBox x:Name="KeepInput">Keep input</CheckBox>
+            <CheckBox x:Name="SeeStrings">See lines</CheckBox>
         </StackPanel>
         <StackPanel
             Grid.Row="1"

@@ -24,6 +24,7 @@ namespace Magter_Ikke_at_tælle
     {
         private static readonly StringBuilder SB = new StringBuilder();
         private string input;
+        private IStringSplitter SP = new StringSplitter();
         private readonly IConvertTextToItems cvi;
         private static readonly int[] idRange = { 60000, 90000 };
         private const int MaxQty = 200;
@@ -38,12 +39,28 @@ namespace Magter_Ikke_at_tælle
         {
             cvi.ResetCount();
             input = InputText.Text;
-            if (input.Length > 10)
+
+            if (SeeStrings.IsChecked == true)
+            {
+                _ = SB.Clear();
+                string[] lines = SP.GetLines(input);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    SB.Append(lines[i] + "\n");
+                }
+                OutputText.Text = SB.ToString();
+
+                //OutputText.Text = SplittedInputString(input);
+            }
+
+            if (input.Length > 10 && SeeStrings.IsChecked == false)
             {
                 items = cvi.ConvertText(input);
+                OutputText.Text = ConvertItemsToString();
+                TotalCount.Text = cvi.CountOfOrderLines().ToString();
             }
-            OutputText.Text = ConvertItemsToString();
-            TotalCount.Text = cvi.CountOfOrderLines().ToString();
+
+
             if (KeepInput.IsChecked == false)
             {
                 InputText.Text = "";
@@ -53,6 +70,17 @@ namespace Magter_Ikke_at_tælle
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             ClearEverything();
+        }
+
+        private string SplittedInputString(string str)
+        {
+            _ = SB.Clear();
+            string[] strings = str.Split();
+            for (int i = 0; i < strings.Length; i++)
+            {
+                _ = SB.Append(strings[i] + "\n");
+            }
+            return SB.ToString();
         }
 
         private string ConvertItemsToString()

@@ -10,6 +10,10 @@ namespace Magter_Ikke_at_tælle.converter.implementations
         private readonly int maxQty;
         private readonly IItemMapper itemMapper;
         private int orderLineCounter = 0;
+        private bool foundId = false;
+        private bool foundQty = false;
+        private int tempItemId = 0;
+        private int tempItemQty = 0;
 
         public TextToItemsConverter(int[] idRange, int maxQty)
         {
@@ -20,10 +24,6 @@ namespace Magter_Ikke_at_tælle.converter.implementations
 
         public List<IItem> ConvertText(string str)
         {
-            bool foundId = false;
-            bool foundQty = false;
-            int itemId = 0;
-            int itemQty = 0;
             string[] splStrings = str.Split();
             _ = str;
             for (int i = 0; i < splStrings.Length; i++)
@@ -36,7 +36,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                         int id = int.Parse(singleStr);
                         if (id > idRange[0] && id < idRange[1])
                         {
-                            itemId = id;
+                            tempItemId = id;
                             foundId = true;
                         }
                     }
@@ -49,33 +49,20 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                         int qty = int.Parse(curStr);
                         if (qty < maxQty)
                         {
-                            itemQty = qty;
+                            tempItemQty = qty;
                             foundQty = true;
                         }
                     }
                 }
                 if (foundId && foundQty)
                 {
-                    IItem item = new Item(itemId, itemQty);
-                    //string name;
-                    //try
-                    //{
-                    //    name = splStrings[i + 1];
-                    //}
-                    //catch (IndexOutOfRangeException e)
-                    //{
-                    //    _ = e;
-                    //    name = "";
-                    //}
-                    //if (name != null && name.Length >= 2)
-                    //{
-                    //    item.Name = name;
-                    //}
-                    _ = itemMapper.AddItem(item);
-                    itemId = 0;
-                    itemQty = 0;
-                    foundId = false;
-                    foundQty = false;
+                    IItem item = new Item(tempItemId, tempItemQty);
+                    string name = TakeName(splStrings, i);
+                    if (name.Length > 0)
+                    {
+                        item.Name = name;
+                    }
+                    AddItemAndResetTempItemInfo(item);
                     orderLineCounter++;
                 }
             }
@@ -85,7 +72,29 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             return items;
         }
 
+        private void AddItemAndResetTempItemInfo(IItem item)
+        {
+            _ = itemMapper.AddItem(item);
+            tempItemId = 0;
+            tempItemQty = 0;
+            foundId = false;
+            foundQty = false;
+        }
 
+        private string TakeName(string[] strs, int i)
+        {
+            string name;
+            try
+            {
+                name = strs[i + 1];
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                _ = e;
+                name = "";
+            }
+            return name;
+        }
 
         private string RemoveDotOrComma(string str)
         {
