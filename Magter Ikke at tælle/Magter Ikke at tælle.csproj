@@ -117,12 +117,12 @@
     </Compile>
     <Compile Include="converter\implementations\Item.cs" />
     <Compile Include="converter\implementations\ItemMapper.cs" />
-    <Compile Include="converter\implementations\StringSplitter.cs" />
+    <Compile Include="converter\implementations\StringMaker.cs" />
     <Compile Include="converter\implementations\TextToItemsConverter.cs" />
     <Compile Include="converter\interfaces\IConvertTextToItems.cs" />
     <Compile Include="converter\interfaces\IItem.cs" />
     <Compile Include="converter\interfaces\IItemMapper.cs" />
-    <Compile Include="converter\interfaces\IStringSplitter.cs" />
+    <Compile Include="converter\interfaces\IStringMaker.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

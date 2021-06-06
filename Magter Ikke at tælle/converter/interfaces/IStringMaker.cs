@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Magter_Ikke_at_tælle.converter.interfaces
 {
-    public interface IStringSplitter
+    public interface IStringMaker
     {
-        string[] GetLines(string str);
-
+        string ReformatStringsToLines(string str);
+        string ConvertItemsToString(List<IItem> list);
+        void Clear();
     }
 }
