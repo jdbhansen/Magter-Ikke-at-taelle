@@ -62,8 +62,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                     {
                         item.Name = name;
                     }
-                    AddItemAndResetTempItemInfo(item);
-                    orderLineCounter++;
+                    AddItemAndResetTempItemInfo(item);                    
                 }
             }
 
@@ -79,6 +78,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             tempItemQty = 0;
             foundId = false;
             foundQty = false;
+            orderLineCounter++;
         }
 
         private string TakeName(string[] strs, int i)
@@ -147,7 +147,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
 
         public void ClearItems()
         {
-            orderLineCounter = 0;
+            ResetCount();
             itemMapper.Clear();
         }
 

@@ -25,7 +25,7 @@ namespace Magter_Ikke_at_tælle
     {
         private static readonly IStringMaker StrMaker = new StringMaker();
         private readonly IConvertTextToItems cvi;
-        private static readonly int[] idRange = { 60000, 90000 };
+        private static readonly int[] idRange = { 60000, 90000 }; //burde ikke være readonly; er det kun indtil funktionaliteten findes.
         private const int MaxQty = 200;
         private string input;
         public MainWindow()
@@ -41,27 +41,45 @@ namespace Magter_Ikke_at_tælle
 
             if (SeeStrings.IsChecked == true)
             {
-                OutputText.Text = StrMaker.ReformatStringsToLines(input);
-                StrMaker.Clear();
+                SetOutputTextToReformatedString(input);
             }
 
             if (input.Length > 10 && SeeStrings.IsChecked == false)
             {
-                OutputText.Text = StrMaker.ConvertItemsToString(cvi.ConvertText(input));
-                StrMaker.Clear();
-                TotalCount.Text = cvi.CountOfOrderLines().ToString();
+                SetOutputTextToItemsAndCurrentCount(input);
             }
-
 
             if (KeepInput.IsChecked == false)
             {
-                InputText.Text = "";
+                SetInputTextToEmpty();
             }
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             ClearEverything();
+        }
+
+        /*
+         * Helperfunctions:
+         */
+
+        private void SetOutputTextToReformatedString(string input)
+        {
+            OutputText.Text = StrMaker.ReformatStringsToLines(input);
+            StrMaker.Clear();
+        }
+
+        private void SetInputTextToEmpty()
+        {
+            InputText.Text = "";
+        }
+
+        private void SetOutputTextToItemsAndCurrentCount(string input)
+        {
+            OutputText.Text = StrMaker.ConvertItemsToString(cvi.ConvertText(input));
+            StrMaker.Clear();
+            TotalCount.Text = cvi.CountOfOrderLines().ToString();
         }
 
         private void ClearEverything()

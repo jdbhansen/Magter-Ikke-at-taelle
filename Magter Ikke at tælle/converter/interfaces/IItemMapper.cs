@@ -2,7 +2,7 @@
 
 namespace Magter_Ikke_at_tælle.converter.interfaces
 {
-    interface IItemMapper
+    public interface IItemMapper
     {
         bool AddItem(IItem item);
         List<IItem> GetItems();
