@@ -67,7 +67,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             }
             List<IItem> items = itemMapper.GetItems();
             itemMapper.Clear();
-            if (sortedById == false)
+            if (sortedById == false && items != null)
             {
                 items.Sort((x, y) => y.Quantity.CompareTo(x.Quantity));
             }
