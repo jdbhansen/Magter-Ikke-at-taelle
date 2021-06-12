@@ -28,7 +28,7 @@
         <StackPanel
             Grid.Row="0"
             Grid.ColumnSpan="3"
-            Margin="50,0,50,0">
+            Margin="50,0,50,10">
             <TextBlock
                 HorizontalAlignment="Stretch"
                 FontFamily="Times New Roman"
@@ -48,18 +48,7 @@
             <CheckBox x:Name="SeeStrings" HorizontalAlignment="Left">See lines</CheckBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label HorizontalAlignment="Left">Min Item ID:</Label>
-            <TextBox
-                x:Name="MinItemId"
-                Width="80"
-                HorizontalAlignment="Left"
-                Text="60000" />
-            <Label HorizontalAlignment="Left">Max item ID:</Label>
-            <TextBox
-                x:Name="MaxItemId"
-                Width="80"
-                HorizontalAlignment="Left"
-                Text="90000" />
+            <CheckBox x:Name="SortCheckbox" HorizontalAlignment="Left">Sort by Id</CheckBox>
         </StackPanel>
         <StackPanel
             Grid.Row="2"

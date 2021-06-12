@@ -7,7 +7,6 @@ namespace Magter_Ikke_at_tælle.converter.implementations
     public class ItemMapper : IItemMapper
     {
         private readonly Dictionary<int, IItem> itemMap;
-        private List<IItem> itemList;
 
         public ItemMapper()
         {
@@ -45,12 +44,9 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             {
                 return null;
             }
-            itemList = (from KeyValuePair<int, IItem>
-                        item in itemMap
-                        select item.Value)
-                        .ToList();
-            itemList.Sort((x, y) => x.Id.CompareTo(y.Id));
-            return itemList;
+            List<IItem> items = (from KeyValuePair<int, IItem> item in itemMap select item.Value).ToList();
+            items.Sort((x, y) => x.Id.CompareTo(y.Id));
+            return items;
         }
     }
 }

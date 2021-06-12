@@ -22,7 +22,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             itemMapper = new ItemMapper();
         }
 
-        public List<IItem> ConvertText(string str)
+        public List<IItem> ConvertTextToItems(string str, bool sortedById)
         {
             string[] splStrings = str.Split();
             _ = str;
@@ -62,12 +62,15 @@ namespace Magter_Ikke_at_tælle.converter.implementations
                     {
                         item.Name = name;
                     }
-                    AddItemAndResetTempItemInfo(item);                    
+                    AddItemAndResetTempItemInfo(item);
                 }
             }
-
             List<IItem> items = itemMapper.GetItems();
             itemMapper.Clear();
+            if (sortedById == false)
+            {
+                items.Sort((x, y) => y.Quantity.CompareTo(x.Quantity));
+            }
             return items;
         }
 

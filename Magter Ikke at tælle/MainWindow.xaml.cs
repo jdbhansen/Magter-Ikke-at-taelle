@@ -77,7 +77,8 @@ namespace Magter_Ikke_at_tælle
 
         private void SetOutputTextToItemsAndCurrentCount(string input)
         {
-            OutputText.Text = StrMaker.ConvertItemsToString(cvi.ConvertText(input));
+            bool isSorted = (bool)SortCheckbox.IsChecked;
+            OutputText.Text = StrMaker.ConvertItemsToString(cvi.ConvertTextToItems(input, isSorted));
             StrMaker.Clear();
             TotalCount.Text = cvi.CountOfOrderLines().ToString();
         }
