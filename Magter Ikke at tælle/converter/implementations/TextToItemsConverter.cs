@@ -22,7 +22,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             itemMapper = new ItemMapper();
         }
 
-        public List<IItem> ConvertTextToItems(string str, bool sortedById)
+        public List<IItem> ConvertTextToItems(string str)
         {
             string[] splStrings = str.Split();
             _ = str;
@@ -67,10 +67,6 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             }
             List<IItem> items = itemMapper.GetItems();
             itemMapper.Clear();
-            if (sortedById == false && items != null)
-            {
-                items.Sort((x, y) => y.Quantity.CompareTo(x.Quantity));
-            }
             return items;
         }
 

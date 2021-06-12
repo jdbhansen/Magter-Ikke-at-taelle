@@ -44,11 +44,23 @@
             Grid.Column="0"
             HorizontalAlignment="Left">
             <Label HorizontalAlignment="Left">Debug</Label>
-            <CheckBox x:Name="KeepInput" HorizontalAlignment="Left">Keep input</CheckBox>
             <CheckBox x:Name="SeeStrings" HorizontalAlignment="Left">See lines</CheckBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <CheckBox x:Name="SortCheckbox" HorizontalAlignment="Left">Sort by Id</CheckBox>
+            <ComboBox x:Name="SortBox">
+                <ComboBoxItem x:Name="QuantityBox" IsSelected="True">
+                    Sort by Quantity
+                </ComboBoxItem>
+                <ComboBoxItem x:Name="IdBox">
+                    Sort by Id
+                </ComboBoxItem>
+            </ComboBox>
+            <CheckBox
+                x:Name="KeepInput"
+                HorizontalAlignment="Left"
+                IsChecked="false">
+                Keep input
+            </CheckBox>
         </StackPanel>
         <StackPanel
             Grid.Row="2"
