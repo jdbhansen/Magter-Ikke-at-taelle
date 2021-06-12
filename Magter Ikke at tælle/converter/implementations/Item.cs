@@ -9,10 +9,7 @@ namespace Magter_Ikke_at_tælle.converter.implementations
         public int Id { get; }
         public int Quantity { get; set; }
         public string Name { get; set; }
-        public ItemCategory ItemType
-        {
-            get => _itemType;
-        }
+        public ItemCategory ItemType => _itemType;
 
         public Item(int id, int qty)
         {
