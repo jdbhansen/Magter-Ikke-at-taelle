@@ -36,7 +36,6 @@ namespace Magter_Ikke_at_tælle
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-
             CTI.ResetCount();
             input = InputText.Text;
             if (SeeStrings.IsChecked == true)
@@ -44,15 +43,52 @@ namespace Magter_Ikke_at_tælle
                 SetOutputTextToReformatedString(input);
             }
 
-            if (input.Length > 10 && SeeStrings.IsChecked == false)
+            if (input.Length > 10 && SeeStrings.IsChecked == false && DoesNotKnow.IsSelected)
             {
                 SetOutputTextToItemsAndCurrentCount(input);
+            }
+
+            if (input.Length > 10 && SeeStrings.IsChecked == false && TabSeperator.IsSelected)
+            {
+                string indexStrs = Indexes.Text.Trim();
+                string[] coordsStrs = indexStrs.Split(',');
+                int[] coords = { 0, 0, 0 };
+                for (int i = 0; i < coordsStrs.Length; i++)
+                {
+                    coords[i] = int.Parse(coordsStrs[i]);
+                }
+                SetOutputTextToNewItemsAndCurrentCount(input, coords);
             }
 
             if (KeepInput.IsChecked == false)
             {
                 SetInputTextToEmpty();
             }
+        }
+
+        private async void SetOutputTextToNewItemsAndCurrentCount(string input, int[] coords)
+        {
+            DisableInput();
+            TotalCount.Text = "Loading";
+            OutputText.Text = "Loading";
+            List<IItem> items = new List<IItem>();
+            Task task = Task.Run(() =>
+            {
+                items = CTI.ConvertTextToItemsFromTabbedStringLines(input, coords);
+            });
+            await task;
+            if (QuantityBox.IsSelected)
+            {
+                OutputText.Text = StrMaker.ConvertItemsToString(SortItems(items, SortType.Quantity));
+            }
+            else if (IdBox.IsSelected)
+            {
+
+                OutputText.Text = StrMaker.ConvertItemsToString(SortItems(items, SortType.Id));
+            }
+            StrMaker.Clear();
+            TotalCount.Text = CTI.CountOfOrderLines().ToString();
+            EnableInput();
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -75,25 +111,26 @@ namespace Magter_Ikke_at_tælle
             InputText.Text = "";
         }
 
+
+
         private async void SetOutputTextToItemsAndCurrentCount(string input)
         {
             DisableInput();
             TotalCount.Text = "Loading";
-            List<IItem> items = new List<IItem>();
             OutputText.Text = "Loading";
+            List<IItem> items = new List<IItem>();
             Task task = Task.Run(() =>
             {
                 items = CTI.ConvertTextToItems(input);
             });
-
+            await task;
             if (QuantityBox.IsSelected)
             {
-                await task;
                 OutputText.Text = StrMaker.ConvertItemsToString(SortItems(items, SortType.Quantity));
             }
             else if (IdBox.IsSelected)
             {
-                await task;
+
                 OutputText.Text = StrMaker.ConvertItemsToString(SortItems(items, SortType.Id));
             }
             StrMaker.Clear();

@@ -70,6 +70,86 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             return items;
         }
 
+        public List<IItem> ConvertTextToItemsFromTabbedStringLines(string input, int[] coords)
+        {
+            if (input != null && input.Length > 10)
+            {
+                if (coords != null && coords.Length == 3)
+                {
+                    string[] splitByLine = input.Split(Environment.NewLine.ToCharArray());
+                    ConvertItemsFromStringLines(coords, splitByLine);
+                }
+            }
+            List<IItem> items = itemMapper.GetItems();
+            itemMapper.Clear();
+            return items;
+        }
+
+        private void ConvertItemsFromStringLines(int[] coords, string[] splitByLine)
+        {
+            for (int i = 0; i < splitByLine.Length; i++)
+            {
+                string[] splitByTab = splitByLine[i].Split('\t');
+                if (splitByLine.Length > 3)
+                {
+                    bool isCoordsValid = false;
+                    CreateItemAndAdd(coords, splitByTab, IsCoordsValid(coords, splitByTab, isCoordsValid));
+                }
+            }
+        }
+
+        private void CreateItemAndAdd(int[] coords, string[] splitByTab, bool isCoordsValid)
+        {
+            if (isCoordsValid)
+            {
+                string idStr = splitByTab[coords[0]];
+                string quantityStr = splitByTab[coords[1]];
+                string name = splitByTab[coords[2]];
+
+                if (InputIsAnInt(idStr) && DoesStringContainDotOrComma(quantityStr) && name.Length > 0)
+                {
+                    int idTemp = int.Parse(idStr);
+                    string qtyTemp = RemoveDotOrComma(quantityStr);
+                    if (InputIsAnInt(qtyTemp) == false)
+                    {
+                        return;
+                    }
+
+                    int quantity = int.Parse(qtyTemp);
+                    if (idTemp > idRange[0] && idTemp < idRange[1])
+                    {
+                        IItem item = new Item(idTemp, quantity, name);
+                        AddItem(item);
+                    }
+                }
+            }
+        }
+
+        private static bool IsCoordsValid(int[] coords, string[] splitByTab, bool isCoordsValid)
+        {
+            for (int r = 0; r < coords.Length; r++)
+            {
+                try
+                {
+                    string result = splitByTab[coords[r]];
+                    isCoordsValid = true;
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    _ = e;
+                    isCoordsValid = false;
+                    break;
+                }
+            }
+            return isCoordsValid;
+        }
+
+        private void AddItem(IItem item)
+        {
+            _ = itemMapper.AddItem(item);
+            orderLineCounter++;
+        }
+
         private void AddItemAndResetTempItemInfo(IItem item)
         {
             _ = itemMapper.AddItem(item);

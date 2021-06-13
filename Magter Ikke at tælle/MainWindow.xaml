@@ -39,13 +39,6 @@
                 THE GLORIOUS 'MAGTER IKKE AT TÆLLE'-APP<LineBreak />
             </TextBlock>
         </StackPanel>
-        <StackPanel
-            Grid.Row="4"
-            Grid.Column="0"
-            HorizontalAlignment="Left">
-            <Label HorizontalAlignment="Left">Debug</Label>
-            <CheckBox x:Name="SeeStrings" HorizontalAlignment="Left">See lines</CheckBox>
-        </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <ComboBox x:Name="SortBox">
                 <ComboBoxItem x:Name="QuantityBox" IsSelected="True">
@@ -61,6 +54,26 @@
                 IsChecked="false">
                 Keep input
             </CheckBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Label>Do you know the format?</Label>
+            <ComboBox>
+                <ComboBoxItem x:Name="DoesNotKnow" IsSelected="True">
+                    No
+                </ComboBoxItem>
+                <ComboBoxItem x:Name="TabSeperator">
+                    TCV
+                </ComboBoxItem>
+            </ComboBox>
+            <Label>Enter column of id, qty, name</Label>
+            <TextBox x:Name="Indexes" Text="0, 0, 0" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="0"
+            HorizontalAlignment="Left">
+            <Label HorizontalAlignment="Left">Debug</Label>
+            <CheckBox x:Name="SeeStrings" HorizontalAlignment="Left">See lines</CheckBox>
         </StackPanel>
         <StackPanel
             Grid.Row="2"
