@@ -5,11 +5,10 @@ namespace Magter_Ikke_at_tælle.converter.implementations
 {
     public class Item : IItem
     {
-        private ItemCategory _itemType;
         public int Id { get; }
         public int Quantity { get; set; }
         public string Name { get; set; }
-        public ItemCategory ItemType => _itemType;
+        public ItemCategory ItemType { get; private set; }
 
         public Item(int id, int qty)
         {
@@ -45,40 +44,40 @@ namespace Magter_Ikke_at_tælle.converter.implementations
         {
             if (Id > 60000 && Id < 61000)
             {
-                _itemType = ItemCategory.Accessory;
+                ItemType = ItemCategory.Accessory;
                 return;
             }
             if (Id > 61000 && Id < 62000)
             {
-                _itemType = ItemCategory.Headset;
+                ItemType = ItemCategory.Headset;
                 return;
             }
             if (Id > 62000 && Id < 63000)
             {
-                _itemType = ItemCategory.Mouse;
+                ItemType = ItemCategory.Mouse;
                 return;
             }
             if (Id > 63000 && Id < 64000)
             {
-                _itemType = ItemCategory.Keyboard;
+                ItemType = ItemCategory.Keyboard;
                 return;
             }
             if (Id > 64000 && Id < 65000)
             {
-                _itemType = ItemCategory.Mousepad;
+                ItemType = ItemCategory.Mousepad;
                 return;
             }
-            _itemType = ItemCategory.Unknown;
+            ItemType = ItemCategory.Unknown;
         }
 
         public void SetItemCategory(ItemCategory itemType)
         {
             if (((int)itemType) > 0 && ((int)itemType) < Enum.GetNames(typeof(ItemCategory)).Length)
             {
-                _itemType = itemType;
+                ItemType = itemType;
                 return;
             }
-            _itemType = ItemCategory.Unknown;
+            ItemType = ItemCategory.Unknown;
         }
     }
 }

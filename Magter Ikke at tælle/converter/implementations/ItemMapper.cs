@@ -44,8 +44,10 @@ namespace Magter_Ikke_at_tælle.converter.implementations
             {
                 return null;
             }
-            List<IItem> items = (from KeyValuePair<int, IItem> item in itemMap select item.Value).ToList();
-            items.Sort((x, y) => x.Id.CompareTo(y.Id));
+            List<IItem> items = (from KeyValuePair<int, IItem>
+                                 item in itemMap
+                                 select item.Value)
+                                 .ToList();
             return items;
         }
     }

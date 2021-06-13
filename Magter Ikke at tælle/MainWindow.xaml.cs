@@ -78,8 +78,7 @@ namespace Magter_Ikke_at_tælle
         private async void SetOutputTextToItemsAndCurrentCount(string input)
         {
             DisableInput();
-            CTI.ResetCount();
-            TotalCount.Text = "Slap af, der tænkes... hvis jeg kunne huske formattet af strengene, så ville det gå hurtigere";
+            TotalCount.Text = "Loading";
             List<IItem> items = new List<IItem>();
             OutputText.Text = "Loading";
             Task task = Task.Run(() =>
@@ -165,7 +164,7 @@ namespace Magter_Ikke_at_tælle
             CTI.ResetCount();
         }
     }
-    public enum SortType
+    public enum SortType : int
     {
         Id,
         Quantity,

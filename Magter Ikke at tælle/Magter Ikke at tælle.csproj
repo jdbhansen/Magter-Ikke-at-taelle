@@ -32,7 +32,7 @@
     <SuiteName>Yesh it is I</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -120,11 +120,13 @@
     </Compile>
     <Compile Include="converter\implementations\Item.cs" />
     <Compile Include="converter\implementations\ItemMapper.cs" />
+    <Compile Include="converter\implementations\ItemType.cs" />
     <Compile Include="converter\implementations\StringMaker.cs" />
     <Compile Include="converter\implementations\TextToItemsConverter.cs" />
     <Compile Include="converter\interfaces\IConvertTextToItems.cs" />
     <Compile Include="converter\interfaces\IItem.cs" />
     <Compile Include="converter\interfaces\IItemMapper.cs" />
+    <Compile Include="converter\interfaces\IItemType.cs" />
     <Compile Include="converter\interfaces\IStringMaker.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
